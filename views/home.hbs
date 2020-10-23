@@ -13,17 +13,45 @@
 <div class="card-footer">
    <div class="row">
        <div class="col">
- <i class="fa fa-heart-o"></i> 0 
+ <i class="like-button fa fa-heart-o" data-fill="no"></i> 0 
        </div>
         <div class="col">
  <i class="ml-2 fa fa-comment-o"></i> 0 
        </div>
        <div class="col">
-  <button type="button" class="btn btn-sm btn-outline-primary">
+  <button type="button" class="rsvp-button btn btn-sm btn-outline-primary" >
   RSVP
 </button>
        </div>
    </div>
+
+   <script>
+  $(".like-button").on("click",function(){
+      var fillStatus= $(this).data("fill");
+      if (fillStatus=="yes"){
+        $(this).removeClass('fa-heart-o');
+        $(this).addClass('fa-heart');
+        $(this).addClass('text-danger');
+        $(this).data("fill","no");
+      }
+     else if (fillStatus=="no"){         
+        $(this).removeClass('text-danger');
+        $(this).removeClass('fa-heart');
+        $(this).addClass('fa-heart-o');
+        $(this).data("fill","yes");
+      }
+
+
+  });
+
+
+  $(".rsvp-button").on("click",function(){
+      $(this).html('<i class="fa fa-check-circle"></i> ');
+      $(this).removeClass('btn-outline-primary');
+      $(this).addClass('btn-success');
+
+  });
+   </script>
        
         
         
