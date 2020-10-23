@@ -49,7 +49,7 @@ pipeline {
             steps {
                 echo "build id = ${env.BUILD_ID}"
                 echo 'Tests passed on to build Docker container'
-                sh "gcloud builds submit -t gcr.io/roidtcuser207/internal:v2.${env.BUILD_ID} ."
+                sh "gcloud builds submit -t gcr.io/roidtcuser207/external:v2.${env.BUILD_ID} ."
             }
         }        
          stage('Deploy') {
@@ -57,8 +57,8 @@ pipeline {
                 echo 'Get cluster credentials'
                 sh 'gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project roidtcuser207'
                 echo 'Update the image'
-                echo "gcr.io/roidtcuser207/internal:2.${env.BUILD_ID}"
-                sh "kubectl set image deployment/demo-ui demo-ui=gcr.io/roidtcuser207/internal:v2.${env.BUILD_ID} --record"
+                echo "gcr.io/roidtcuser207/external:2.${env.BUILD_ID}"
+                sh "kubectl set image deployment/demo-ui demo-ui=gcr.io/roidtcuser207/external:v2.${env.BUILD_ID} --record"
             }
         }        
                
